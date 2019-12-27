@@ -1,6 +1,6 @@
 {
-  "name": "@openapitools/openapi-generator-cli",
-  "version": "0.0.21",
+  "name": "openapi-generator-cli",
+  "version": "0.0.27",
   "description": "A npm package wrapper for OpenAPI Generator (https://github.com/OpenAPITools/openapi-generator), generates which API client libraries (SDK generation), server stubs, documentation and configuration automatically given an OpenAPI Spec (v2, v3)",
   "private": false,
   "keywords": [
@@ -22,6 +22,10 @@
   },
   "scripts": {
     "clean": "rimraf ./dist",
+    "version:voskhod": "npm version patch",
+    "build:voskhod": "npm run clean && node bin/build-for-voskhod.js",
+    "publish:voskhod": "node bin/publish_to_voskhod_nexus.js",
+    "deploy:voskhod": "npm run version:voskhod && npm run build:voskhod && npm run publish:voskhod",
     "build:all": "npm run clean && node bin/build-all",
     "build:new": "npm run clean && node bin/build-new",
     "publish": "node bin/publish && node bin/tag-latest"
@@ -33,6 +37,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/openapitools/openapi-generator-cli.git"
+  },
+  "publishConfig": {
+    "registry": "http://nexus.voskhod.local/nexus-2.7.0/content/repositories/npm-internal"
   },
   "homepage": "https://github.com/openapitools/openapi-generator-cli#readme",
   "license": "Apache-2.0",
